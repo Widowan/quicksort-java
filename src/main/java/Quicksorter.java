@@ -8,10 +8,6 @@ public class Quicksorter<T extends Comparable<? super T>> {
     private long cmpCnt   = 0;
     private long maxDepth = 0;
 
-    public List<T> getNums() {
-		return nums;
-	}
-    
     public Quicksorter(List<T> nums) {
         this.nums = nums;
     }
@@ -40,6 +36,10 @@ public class Quicksorter<T extends Comparable<? super T>> {
         while (true) {
             while (list.get(i).compareTo(pivot) < 0) { i++; cmpCnt++; }
             while (list.get(j).compareTo(pivot) > 0) { j--; cmpCnt++; }
+
+            // For false conditions above,
+            // comparison still been made
+            cmpCnt += 2;
 
             if (i >= j) return j;
             Collections.swap(list, i++, j--);
@@ -92,7 +92,7 @@ public class Quicksorter<T extends Comparable<? super T>> {
         return sorted;
     }
 
-    private record SortResults<T>(
+    public record SortResults<T>(
             List<T> nums,
             long swapCnt,
             long cmpCnt,

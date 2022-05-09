@@ -39,7 +39,7 @@ public class Input {
 
     private static List<Integer> getRandomInput(int len) {
         return new Random()
-                .ints(len, 1, 10000)
+                .ints(len)
                 .boxed()
                 .collect(Collectors.toList());
     }
