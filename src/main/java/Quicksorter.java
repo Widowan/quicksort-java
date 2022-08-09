@@ -47,31 +47,6 @@ public class Quicksorter<T extends Comparable<? super T>> {
         }
     }
 
-    private List<T> rawPrimitiveSort(List<T> list) {
-        if (list.size() == 0) return list;
-        var pivot = list.remove(list.size()/2);
-
-        var leftArr = list.stream()
-                .filter(x -> x.compareTo(pivot) <= 0)
-                .collect(Collectors.toList());
-        var rightArr = list.stream()
-                .filter(x -> x.compareTo(pivot) >= 0)
-                .collect(Collectors.toList());
-
-        return concatLists(
-                rawPrimitiveSort(leftArr),
-                List.of(pivot),
-                rawPrimitiveSort(rightArr));
-    }
-
-    @SafeVarargs
-    private List<T> concatLists(List<T>... lists) {
-        var resultList = new ArrayList<T>();
-        for (var list : lists)
-            resultList.addAll(list);
-        return resultList;
-    }
-
     private T median3(List<T> list, int from, int to) {
         return Stream.of(
                 list.get(from),
